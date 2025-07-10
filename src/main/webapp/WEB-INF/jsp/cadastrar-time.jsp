@@ -18,9 +18,19 @@
 </head>
 <body class="bg-light">
 
-<div class="container mt-5">
-    <div class="card shadow p-4">
-        <h2 class="mb-4">Cadastrar Novo Time</h2>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand" href="/login/home">Sistema de Dirigentes</a>
+        <div class="d-flex ms-auto align-items-center text-white">
+            <span class="me-3">Olá, <strong><%= dirigente.getNome() %></strong></span>
+            <a href="/logout" class="btn btn-outline-light btn-sm">Sair</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow p-4 w-100" style="max-width: 600px;">
+        <h2 class="mb-4 text-center">Cadastrar Novo Time</h2>
 
         <form action="/time" method="post">
             <input type="hidden" name="opcao" value="cadastrar">
@@ -36,8 +46,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="dirigente" class="form-label">Dirigente Responsável</label>
-                <input type="text" class="form-control" id="dirigente" value="<%= dirigente.getNome() %>" readonly>
+                <label class="form-label">Dirigente Responsável</label>
+                <input type="text" class="form-control" value="<%= dirigente.getNome() %>" readonly>
                 <input type="hidden" name="dirigenteId" value="<%= dirigente.getId() %>">
             </div>
 

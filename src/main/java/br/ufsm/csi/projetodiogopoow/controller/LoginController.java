@@ -10,24 +10,20 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class LoginController {
 
-
     @GetMapping("/")
     public String redirectRoot() {
         return "redirect:/login";
     }
 
-
     @GetMapping("/login")
     public String mostrarLogin() {
-        return "index";
+        return "index"; // JSP de login: /WEB-INF/jsp/index.jsp
     }
-
 
     @GetMapping("/index")
     public String mostrarIndex() {
         return "index";
     }
-
 
     @PostMapping("/login")
     public String login(@RequestParam String email,
@@ -51,13 +47,13 @@ public class LoginController {
         }
     }
 
-
     @GetMapping("/login/home")
     public String home(HttpSession session) {
-
         if (session.getAttribute("dirigenteLogado") == null) {
             return "redirect:/login";
         }
         return "home";
     }
+
+
 }

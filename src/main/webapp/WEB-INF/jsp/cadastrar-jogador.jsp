@@ -27,9 +27,21 @@
 </head>
 <body class="bg-light">
 
-<div class="container mt-5">
-    <div class="card shadow p-4">
-        <h2 class="mb-4">Cadastrar Novo Jogador</h2>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand" href="/login/home">Sistema de Dirigentes</a>
+        <div class="d-flex ms-auto align-items-center text-white">
+            <span class="me-3">Olá, <strong><%= dirigente.getNome() %></strong></span>
+            <a href="/logout" class="btn btn-outline-light btn-sm">Sair</a>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTEÚDO -->
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow p-4 w-100" style="max-width: 600px;">
+        <h2 class="mb-4 text-center">Cadastrar Novo Jogador</h2>
 
         <form action="/jogador" method="post">
             <input type="hidden" name="opcao" value="cadastrar">
@@ -55,14 +67,14 @@
             </div>
 
             <div class="mb-3">
-                <label for="time" class="form-label">Time</label>
-                <input type="text" class="form-control" id="time" value="<%= time.getNome() %>" readonly>
+                <label class="form-label">Time</label>
+                <input type="text" class="form-control" value="<%= time.getNome() %>" readonly>
                 <input type="hidden" name="timeId" value="<%= time.getId() %>">
             </div>
 
             <div class="mb-3">
-                <label for="dirigente" class="form-label">Dirigente</label>
-                <input type="text" class="form-control" id="dirigente" value="<%= dirigente.getNome() %>" readonly>
+                <label class="form-label">Dirigente</label>
+                <input type="text" class="form-control" value="<%= dirigente.getNome() %>" readonly>
                 <input type="hidden" name="dirigenteId" value="<%= dirigente.getId() %>">
             </div>
 
