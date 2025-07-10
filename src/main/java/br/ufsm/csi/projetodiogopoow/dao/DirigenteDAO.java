@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class DirigenteDAO {
 
-
     public static ArrayList<Dirigente> getDirigentes() {
         ArrayList<Dirigente> dirigentes = new ArrayList<>();
         String sql = "SELECT * FROM dirigentes";
@@ -34,8 +33,7 @@ public class DirigenteDAO {
         return dirigentes;
     }
 
-
-    public static Dirigente inserir(Dirigente dirigente) {
+    public static boolean inserir(Dirigente dirigente) {
         String sql = "INSERT INTO dirigentes(nome, email, senha) VALUES (?, ?, ?)";
 
         try (Connection connection = ConectarBD.getConnectionPostgres();
@@ -52,6 +50,7 @@ public class DirigenteDAO {
                     if (rs.next()) {
                         dirigente.setId(rs.getInt(1));
                         System.out.println("Dirigente inserido com sucesso! ID: " + dirigente.getId());
+                        return true;
                     }
                 }
             } else {
@@ -63,9 +62,8 @@ public class DirigenteDAO {
             e.printStackTrace();
         }
 
-        return dirigente;
+        return false;
     }
-
 
     public static boolean excluir(int id) {
         String sql = "DELETE FROM dirigentes WHERE id = ?";
@@ -84,7 +82,6 @@ public class DirigenteDAO {
         }
     }
 
-
     public static Dirigente alterar(Dirigente dirigente) {
         String sql = "UPDATE dirigentes SET nome = ?, email = ?, senha = ? WHERE id = ?";
 
@@ -99,19 +96,18 @@ public class DirigenteDAO {
             int rows = stmt.executeUpdate();
             if (rows > 0) {
                 System.out.println("Dirigente atualizado com sucesso!");
+                return dirigente;
             } else {
                 System.err.println("Nenhuma linha atualizada. Verifique o ID.");
             }
 
-            return dirigente;
-
         } catch (SQLException e) {
             System.err.println("Erro ao atualizar dirigente: " + e.getMessage());
             e.printStackTrace();
-            return null;
         }
-    }
 
+        return null;
+    }
 
     public static Dirigente buscarPorEmail(String email) {
         String sql = "SELECT * FROM dirigentes WHERE email = ?";

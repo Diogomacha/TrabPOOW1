@@ -15,13 +15,23 @@ public class AutorizadorInterceptor implements HandlerInterceptor {
 
         String url = request.getRequestURI();
 
-        // Permitir acesso liberado para login, logout e recursos estáticos
-        if (url.equals("/") || url.equals("/login") || url.equals("/logout") || url.startsWith("/resources/")) {
+        if (
+                url.equals("/") ||
+                        url.equals("/login") ||
+                        url.equals("/logout") ||
+                        url.equals("/index") ||
+                        url.equals("/dirigente/cadastro") || 
+                        url.startsWith("/resources/") ||
+                        url.startsWith("/css/") ||
+                        url.startsWith("/js/") ||
+                        url.startsWith("/images/")
+        ) {
             return true;
         }
 
-        // Verificar se o dirigente está na sessão
-        if (request.getSession(false) == null || request.getSession(false).getAttribute("dirigenteLogado") == null) {
+
+        if (request.getSession(false) == null ||
+                request.getSession(false).getAttribute("dirigenteLogado") == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return false;
         }
